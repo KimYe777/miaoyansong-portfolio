@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>租前眼｜可交互高保真原型</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="flow-mode">
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2"/><path d="m9 13 2 2 4-4"/></symbol>
+    <symbol id="camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v1"/></symbol>
+  </svg>
+  <header class="review-header">
+    <div>
+      <p>RENT EYE · UI REBUILD 01</p>
+      <h1>租前眼 UI 重构首轮</h1>
+    </div>
+    <div class="review-note">所有界面均为 HTML 原生组件，不是截图。点击底部导航、筛选项、清单任务与主要按钮可查看状态。</div>
+  </header>
+
+  <main class="screen-board" id="screen-board">
+    <section class="screen-case active" id="screen-home" data-label="01 首页">
+      <div class="case-meta"><b>01 首页</b><span>搜索与计划优先</span></div>
+      <div class="phone-shell">
+        <div class="app-screen home-screen">
+          <header class="app-header home-header">
+            <div><span class="location">上海 · 杨浦</span><strong>租前眼</strong></div>
+            <button class="avatar" aria-label="我的">陈</button>
+          </header>
+          <div class="scroll-area">
+            <section class="home-intro">
+              <h2>周末看房，先把三套房理清楚</h2>
+              <p>把不同平台收藏的候选房放在一起，再决定先看哪套。</p>
+            </section>
+            <label class="search-box">
+              <span>搜索目的地或候选房</span>
+              <input value="江湾体育场 45 分钟通勤内" aria-label="搜索目的地或候选房">
+            </label>
+            <div class="filter-strip" aria-label="快捷筛选">
+              <button class="filter active">预算 ≤ 3600</button>
+              <button class="filter">通勤 ≤ 45m</button>
+              <button class="filter">近地铁</button>
+            </div>
+            <section class="section-block visit-plan">
+              <div class="section-title"><div><small>本周计划</small><h3>周六 · 3 套待看</h3></div><button data-scroll="screen-checklist">查看清单</button></div>
+              <div class="timeline-row">
+                <span>10:00</span><div><b>南门合租 A</b><small>先确认服务费口径</small></div><em class="risk-dot">2 项待问</em>
+              </div>
+              <div class="timeline-row">
+                <span>13:30</span><div><b>静安里合租 C</b><small>房源主体已核验</small></div><em class="ok-dot">可预约</em>
+              </div>
+              <div class="timeline-row">
+                <span>16:00</span><div><b>江湾整租 B</b><small>首付超出当前预算</small></div><em class="warn-dot">需复核</em>
+              </div>
+            </section>
+            <section class="section-block evidence-summary">
+              <div class="section-title"><div><small>核验进度</small><h3>还有 4 项没有证据</h3></div><span class="progress-number">7/11</span></div>
+              <div class="progress-track"><i style="width:64%"></i></div>
+              <div class="summary-links"><button>费用口径 2</button><button>出租主体 1</button><button>现场照片 1</button></div>
+            </section>
+          </div>
+          <nav class="tabbar">
+            <button class="active" data-scroll="screen-home"><svg><use href="#home"/></svg><span>首页</span></button>
+            <button data-scroll="screen-library"><svg><use href="#clipboard"/></svg><span>房源</span></button>
+            <button data-scroll="screen-compare"><svg><use href="#copy"/></svg><span>对比</span></button>
+            <button data-scroll="screen-checklist"><svg><use href="#camera"/></svg><span>看房</span></button>
+            <button data-scroll="screen-saved"><svg><use href="#user"/></svg><span>我的</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen-case" id="screen-library" data-label="02 房源库">
+      <div class="case-meta"><b>02 房源库</b><span>商品信息与核验状态同屏</span></div>
+      <div class="phone-shell">
+        <div class="app-screen library-screen">
+          <header class="app-header simple-header"><div><small>候选房源</small><strong><span id="property-count">3</span> 套在看</strong></div><button class="header-action" id="open-add-property">＋ 添加</button></header>
+          <div class="library-controls">
+            <div class="segmented" data-filter-group><button class="active">全部</button><button>已核验</button><button>待确认</button></div>
+            <button class="sort-button">综合排序⌄</button>
+          </div>
+          <div class="scroll-area property-scroll">
+            <article class="property-card" data-property-status="verified">
+              <img src="assets/candidate-c-common-area.jpg" alt="静安里合租 C 室内照片">
+              <div class="property-body">
+                <div class="property-head"><div><h3>静安里合租 C</h3><p>江宁路 · 距地铁 520m</p></div><strong>¥3,100<small>/月</small></strong></div>
+                <p class="property-facts">合租次卧 · 18㎡ · 朝南 · 3 人合租</p>
+                <div class="tag-row"><span class="tag verified">主体已核验</span><span class="tag">押一付一</span><span class="tag">通勤 31m</span></div>
+                <div class="card-actions"><button data-scroll="screen-detail">查看详情</button><button class="primary-small" data-select>加入对比</button></div>
+              </div>
+            </article>
+            <article class="property-card" data-property-status="pending">
+              <img src="assets/candidate-a-window.jpg" alt="南门合租 A 室内照片">
+              <div class="property-body">
+                <div class="property-head"><div><h3>南门合租 A</h3><p>五角场 · 距地铁 680m</p></div><strong>¥2,800<small>/月</small></strong></div>
+                <p class="property-facts">合租次卧 · 16㎡ · 朝东 · 4 人合租</p>
+                <div class="tag-row"><span class="tag conflict">费用说法冲突</span><span class="tag">押一付一</span><span class="tag">通勤 42m</span></div>
+                <div class="card-actions"><button data-scroll="screen-detail">查看详情</button><button class="primary-small selected" data-select>已加入</button></div>
+              </div>
+            </article>
+            <article class="property-card" data-property-status="pending">
+              <img src="assets/candidate-b-ventilation.jpg" alt="江湾整租 B 室内照片">
+              <div class="property-body">
+                <div class="property-head"><div><h3>江湾整租 B</h3><p>江湾镇 · 距地铁 410m</p></div><strong>¥3,500<small>/月</small></strong></div>
+                <p class="property-facts">整租一居 · 32㎡ · 朝北 · 电梯房</p>
+                <div class="tag-row"><span class="tag warning">首付偏高</span><span class="tag">押一付三</span><span class="tag">通勤 46m</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="screen-state loading-state" id="library-loading" hidden aria-live="polite">
+            <div class="state-topline"><i></i><span>正在整理候选房源…</span></div>
+            <div class="skeleton-card"><i></i><span></span><span></span><span></span></div>
+            <div class="skeleton-card"><i></i><span></span><span></span><span></span></div>
+          </div>
+          <div class="screen-state empty-state" id="library-empty" hidden>
+            <div class="empty-mark">0</div>
+            <h3>没有符合当前条件的房源</h3>
+            <p>筛选条件可能过窄，已保存的候选房不会被删除。</p>
+            <button id="restore-properties">查看全部 3 套</button>
+          </div>
+          <div class="sheet-backdrop" id="add-property-sheet" hidden>
+            <form class="bottom-sheet" id="add-property-form">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title"><div><small>ADD PROPERTY</small><h3>添加候选房</h3></div><button type="button" data-close-sheet>×</button></div>
+              <label class="form-field"><span>房源链接或名称</span><input value="南门合租 A" aria-label="房源链接或名称"></label>
+              <label class="form-field" id="budget-field"><span>月租预算</span><input id="budget-input" inputmode="numeric" placeholder="请输入预算，例如 3600" aria-label="月租预算"><small id="budget-error" hidden>请输入大于 0 的月租预算</small></label>
+              <button class="primary-button sheet-submit" type="submit">继续补充房源信息</button>
+            </form>
+          </div>
+          <nav class="tabbar">
+            <button data-scroll="screen-home"><svg><use href="#home"/></svg><span>首页</span></button>
+            <button class="active"><svg><use href="#clipboard"/></svg><span>房源</span></button>
+            <button data-scroll="screen-compare"><svg><use href="#copy"/></svg><span>对比</span></button>
+            <button data-scroll="screen-checklist"><svg><use href="#camera"/></svg><span>看房</span></button>
+            <button data-scroll="screen-saved"><svg><use href="#user"/></svg><span>我的</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen-case" id="screen-compare" data-label="03 对比">
+      <div class="case-meta"><b>03 横向对比</b><span>先看硬差异，再看证据缺口</span></div>
+      <div class="phone-shell">
+        <div class="app-screen">
+          <header class="app-header simple-header"><div><small>候选房源</small><strong>对比 3 套</strong></div><button class="header-action">编辑</button></header>
+          <div class="scroll-area compare-scroll">
+            <div class="compare-tabs"><button class="active">关键差异</button><button>全部字段</button></div>
+            <section class="compare-table">
+              <div class="compare-header"><span></span><b>静安里</b><b>南门</b><b>江湾</b></div>
+              <div class="compare-line"><span>月租</span><b>¥3,100</b><b class="best">¥2,800</b><b>¥3,500</b></div>
+              <div class="compare-line"><span>首次付款</span><b class="best">¥6,200</b><b>¥8,400</b><b class="risk-text">¥14,000</b></div>
+              <div class="compare-line"><span>通勤</span><b class="best">31m</b><b>42m</b><b>46m</b></div>
+              <div class="compare-line"><span>面积</span><b>18㎡</b><b>16㎡</b><b class="best">32㎡</b></div>
+              <div class="compare-line"><span>来源状态</span><b class="status-word ok">已核验</b><b class="status-word risk">有冲突</b><b class="status-word warn">待补充</b></div>
+            </section>
+            <section class="decision-note">
+              <span class="note-mark">!</span>
+              <div><small>最需要先问清</small><h3>南门合租 A 的低价带有条件</h3><p>房源页写“押一付一”，聊天记录又出现一个月服务费。看房前先要求书面费用清单。</p></div>
+            </section>
+            <section class="compare-actions">
+              <button class="secondary-button">保存本次对比</button>
+              <button class="primary-button" data-scroll="screen-checklist">生成看房清单</button>
+            </section>
+          </div>
+          <nav class="tabbar">
+            <button data-scroll="screen-home"><svg><use href="#home"/></svg><span>首页</span></button>
+            <button data-scroll="screen-library"><svg><use href="#clipboard"/></svg><span>房源</span></button>
+            <button class="active"><svg><use href="#copy"/></svg><span>对比</span></button>
+            <button data-scroll="screen-checklist"><svg><use href="#camera"/></svg><span>看房</span></button>
+            <button data-scroll="screen-saved"><svg><use href="#user"/></svg><span>我的</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen-case" id="screen-checklist" data-label="04 看房清单">
+      <div class="case-meta"><b>04 看房清单</b><span>任务、证据、撤销形成闭环</span></div>
+      <div class="phone-shell">
+        <div class="app-screen checklist-screen">
+          <header class="app-header simple-header"><div><small>周六 · 10:00</small><strong>南门合租 A</strong></div><button class="header-action">切换房源</button></header>
+          <div class="scroll-area checklist-scroll">
+            <section class="check-progress">
+              <div><small>现场核查进度</small><strong><span id="done-count">2</span>/6</strong></div>
+              <div class="progress-track"><i id="task-progress" style="width:33%"></i></div>
+            </section>
+            <section class="task-group">
+              <div class="task-heading"><h3>费用与出租主体</h3><span>必须确认</span></div>
+              <label class="task checked"><input type="checkbox" checked><i></i><div><b>索要完整费用清单</b><small>租金、服务费、水电、网费</small></div><button type="button" aria-label="拍照"><svg><use href="#camera"/></svg></button></label>
+              <label class="task"><input type="checkbox"><i></i><div><b>核对出租人身份材料</b><small>产权人、代理关系或转租授权</small></div><button type="button" aria-label="拍照"><svg><use href="#camera"/></svg></button></label>
+              <label class="task checked"><input type="checkbox" checked><i></i><div><b>确认押金退还条件</b><small>扣款项目和退还时间</small></div><button type="button" aria-label="添加备注" data-note="确认押金退还条件">记</button></label>
+            </section>
+            <section class="task-group">
+              <div class="task-heading"><h3>现场居住条件</h3><span>拍照留证</span></div>
+              <label class="task"><input type="checkbox"><i></i><div><b>关闭窗户听室内噪声</b><small>分别记录白天和关窗状态</small></div><button type="button" aria-label="添加备注" data-note="关闭窗户听室内噪声">记</button></label>
+              <label class="task"><input type="checkbox"><i></i><div><b>检查墙面渗水与霉斑</b><small>窗边、空调孔、卫生间顶面</small></div><button type="button" aria-label="拍照"><svg><use href="#camera"/></svg></button></label>
+              <label class="task"><input type="checkbox"><i></i><div><b>确认公共区域使用规则</b><small>冰箱、洗衣机和清洁安排</small></div><button type="button" aria-label="添加备注" data-note="确认公共区域使用规则">记</button></label>
+            </section>
+          </div>
+          <div class="undo-toast" id="undo-toast" hidden><span>已完成一项核查</span><button id="undo-task"><svg><use href="#undo"/></svg>撤销</button></div>
+          <div class="sheet-backdrop" id="note-sheet" hidden>
+            <form class="bottom-sheet note-sheet" id="note-form">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title"><div><small>ON-SITE NOTE</small><h3 id="note-title">添加现场备注</h3></div><button type="button" data-close-note>×</button></div>
+              <label class="form-field"><span>备注内容</span><textarea id="note-input" rows="4" placeholder="记录询问结果、现场情况或仍需确认的问题"></textarea></label>
+              <button class="primary-button sheet-submit" type="submit">保存备注</button>
+            </form>
+          </div>
+          <div class="save-toast" id="save-toast" hidden><span>备注已保存，可继续修改</span><button data-edit-note>再次编辑</button></div>
+          <nav class="tabbar">
+            <button data-scroll="screen-home"><svg><use href="#home"/></svg><span>首页</span></button>
+            <button data-scroll="screen-library"><svg><use href="#clipboard"/></svg><span>房源</span></button>
+            <button data-scroll="screen-compare"><svg><use href="#copy"/></svg><span>对比</span></button>
+            <button class="active"><svg><use href="#camera"/></svg><span>看房</span></button>
+            <button data-scroll="screen-saved"><svg><use href="#user"/></svg><span>我的</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen-case" id="screen-saved" data-label="05 我的">
+      <div class="case-meta"><b>05 我的</b><span>围绕本地记录，不做空账户页</span></div>
+      <div class="phone-shell">
+        <div class="app-screen">
+          <header class="app-header profile-header"><div class="profile-avatar">陈</div><div><strong>我的租房记录</strong><small>所有内容仅保存在当前设备</small></div><button class="header-action">设置</button></header>
+          <div class="scroll-area saved-scroll">
+            <section class="record-overview">
+              <div><strong>3</strong><span>候选房</span></div><div><strong>2</strong><span>看房记录</span></div><div><strong>11</strong><span>证据条目</span></div>
+            </section>
+            <section class="saved-section">
+              <div class="section-title"><h3>本周看房夹</h3><button data-scroll="screen-checklist">继续记录</button></div>
+              <article class="folder-card">
+                <div><span class="date-chip">周六</span><small>10:00–17:00</small></div>
+                <h3>杨浦 · 3 套候选房</h3>
+                <p>已准备费用问题、出租主体材料和现场检查任务。</p>
+                <div class="folder-footer"><span>完成 7/11 项</span><i><b style="width:64%"></b></i></div>
+              </article>
+            </section>
+            <section class="saved-section">
+              <div class="section-title"><h3>最近记录</h3><button>全部</button></div>
+              <button class="record-row" data-scroll="screen-detail"><img src="assets/candidate-a-window.jpg" alt="南门合租 A"><span><b>南门合租 A</b><small>新增 1 条费用疑点 · 今天</small></span><em class="risk-dot">待补问</em></button>
+              <button class="record-row"><img src="assets/candidate-c-common-area.jpg" alt="静安里合租 C"><span><b>静安里合租 C</b><small>出租主体已核验 · 昨天</small></span><em class="ok-dot">已保存</em></button>
+            </section>
+            <section class="settings-list">
+              <button><span>导出看房摘要</span><em>›</em></button>
+              <button id="open-data-modal"><span>数据与隐私说明</span><em>›</em></button>
+            </section>
+          </div>
+          <div class="center-modal-backdrop" id="data-modal" hidden>
+            <section class="center-modal" role="dialog" aria-modal="true" aria-labelledby="data-modal-title">
+              <small>DATA &amp; BOUNDARY</small>
+              <h3 id="data-modal-title">数据只保存在当前设备</h3>
+              <p>租前眼用于整理候选房、费用和现场记录，不提供交易、付款或法律结论。删除浏览器数据后，本地记录也会被清除。</p>
+              <button class="primary-button" id="close-data-modal">我知道了</button>
+            </section>
+          </div>
+          <nav class="tabbar">
+            <button data-scroll="screen-home"><svg><use href="#home"/></svg><span>首页</span></button>
+            <button data-scroll="screen-library"><svg><use href="#clipboard"/></svg><span>房源</span></button>
+            <button data-scroll="screen-compare"><svg><use href="#copy"/></svg><span>对比</span></button>
+            <button data-scroll="screen-checklist"><svg><use href="#camera"/></svg><span>看房</span></button>
+            <button class="active"><svg><use href="#user"/></svg><span>我的</span></button>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen-case" id="screen-detail" data-label="06 房源详情">
+      <div class="case-meta"><b>06 房源详情</b><span>先看房源事实，再看证据状态</span></div>
+      <div class="phone-shell">
+        <div class="app-screen detail-screen">
+          <header class="detail-topbar"><button data-scroll="screen-library">‹</button><strong>房源详情</strong><button>•••</button></header>
+          <div class="scroll-area detail-scroll">
+            <div class="property-gallery"><img src="assets/candidate-a-window.jpg" alt="南门合租 A 房间"><span>1/6</span></div>
+            <section class="detail-main">
+              <div class="detail-price"><strong>¥2,800<small>/月</small></strong><span class="tag conflict">费用说法冲突</span></div>
+              <h2>南门合租 A</h2>
+              <p>五角场 · 距地铁约 680m</p>
+              <div class="fact-grid"><div><b>合租次卧</b><small>户型</small></div><div><b>16㎡</b><small>面积</small></div><div><b>朝东</b><small>朝向</small></div><div><b>42 分钟</b><small>通勤</small></div></div>
+            </section>
+            <section class="detail-section fee-section">
+              <div class="section-title"><h3>首次付款</h3><strong>预计 ¥8,400</strong></div>
+              <div class="fee-row"><span>首月租金</span><b>¥2,800</b></div>
+              <div class="fee-row"><span>押金</span><b>¥2,800</b></div>
+              <div class="fee-row conflict-line"><span>服务费</span><b>待书面确认</b></div>
+            </section>
+            <section class="detail-section evidence-section">
+              <div class="section-title"><h3>证据状态</h3><button>查看全部</button></div>
+              <div class="evidence-row ok"><i>✓</i><div><b>房源图片</b><small>已有现场视频补充</small></div><span>已核对</span></div>
+              <div class="evidence-row risk"><i>!</i><div><b>费用口径</b><small>页面与聊天记录不一致</small></div><span>需补问</span></div>
+              <div class="evidence-row warn"><i>·</i><div><b>出租主体</b><small>尚未看到授权材料</small></div><span>待查看</span></div>
+            </section>
+            <section class="detail-section"><div class="section-title"><h3>看房时重点检查</h3><button data-scroll="screen-checklist">打开清单</button></div><p class="detail-copy">确认服务费、押金退还条件、公共区域使用规则，并拍摄窗边与卫生间顶面。</p></section>
+          </div>
+          <div class="detail-bottom"><button class="secondary-button">加入对比</button><button class="primary-button" data-scroll="screen-checklist">准备看房</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
