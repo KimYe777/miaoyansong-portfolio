@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="日迹老人终端独立交互演示。">
+  <title>日迹｜老人终端</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="standalone-body terminal-standalone" data-standalone="terminal">
+  <main class="standalone-stage" aria-label="日迹老人终端演示">
+    <div class="terminal-device standalone-terminal-device" aria-label="老人终端界面">
+      <section id="terminal-screen" class="terminal-screen" aria-live="polite"></section>
+    </div>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

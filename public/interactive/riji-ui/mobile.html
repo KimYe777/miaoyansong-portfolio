@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="日迹家人手机端独立交互演示。">
+  <title>日迹｜家人手机端</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="standalone-body mobile-standalone" data-standalone="mobile">
+  <main class="standalone-stage" aria-label="日迹家人手机端演示">
+    <div class="mobile-device standalone-mobile-device" aria-label="家人手机端界面">
+      <div class="mobile-speaker" aria-hidden="true"></div>
+      <section id="mobile-screen" class="mobile-screen" aria-live="polite"></section>
+    </div>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
