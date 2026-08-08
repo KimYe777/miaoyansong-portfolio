@@ -1,6 +1,6 @@
 import { Reveal } from '../components/Reveal';
 
-const portfolioPdfUrl = `${import.meta.env.BASE_URL}assets/documents/缪岩松_个人作品集.pdf`;
+const portfolioPdfUrl = `${import.meta.env.BASE_URL}assets/documents/portfolio.pdf`;
 
 export function AboutPage() {
   return (
